@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShoppingCart.Tests
 {
-    public class CartHandlerTests
+    public class CartHandlerTest
     {
         private static Cart _cart = new Cart();
         private static CartHandler _cartHandler = new CartHandler(_cart);

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShoppingCart.Tests
 {
-    public class CartConfigurationTests
+    public class CartConfigurationTest
     {
         [Theory]
         [InlineData("iPhone")]
@@ -12,7 +12,7 @@ namespace ShoppingCart.Tests
 
         public void Check_discounts_for_individual_products(string ProductName)
         {
-            Assert.Equal(10, CartConfiguration.GetDiscountPercentage(ProductName));
+            Assert.Equal(10, Vendor.GetDiscountPercentage(ProductName));
         }
 
     }

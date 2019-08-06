@@ -3,7 +3,7 @@ using Xunit;
 
 namespace ShoppingCart.Tests
 {
-    public class CartItemTests
+    public class CartItemTest
     {
         private CartItem _cartItem;
         [Theory]

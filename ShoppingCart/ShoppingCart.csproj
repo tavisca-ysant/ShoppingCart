@@ -6,4 +6,8 @@
     <RootNamespace>ShoppingCart</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="Vendor.cs" />
+  </ItemGroup>
+
 </Project>

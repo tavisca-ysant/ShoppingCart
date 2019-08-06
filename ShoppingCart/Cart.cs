@@ -18,12 +18,5 @@ namespace ShoppingCart
         {
             get => _cartStorage;
         }
-
-        
-
-
-
-       
-        
     }
 }

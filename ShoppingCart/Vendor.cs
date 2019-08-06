@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShoppingCart
 {
-    public class CartConfiguration
+    public class Vendor
     {
         private static Dictionary<string, double> _discountMap = new Dictionary<string, double>()
         {

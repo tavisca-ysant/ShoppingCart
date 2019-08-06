@@ -7,8 +7,7 @@ namespace ShoppingCart
     public class CartHandler
     {
         private Cart _cart;
-        
-        
+                
         public CartHandler(Cart cart)
         {
             _cart = cart;
@@ -23,7 +22,6 @@ namespace ShoppingCart
                     return true;
             }
             return false;
-            
         }
 
         public void AddToCart(CartItem cartItem)
@@ -36,14 +34,13 @@ namespace ShoppingCart
                 _cart.CartStorage[index].Quantity = _cart.CartStorage[index].Quantity + cartItem.Quantity;
 
             }
-
             else
                 _cart.CartStorage.Add(cartItem);
         }
 
         public double GetDiscount(string ProductName)
         {
-           return CartConfiguration.GetDiscountPercentage(ProductName);
+           return Vendor.GetDiscountPercentage(ProductName);
         }
 
         public double[] GetAmountToBePaid()
