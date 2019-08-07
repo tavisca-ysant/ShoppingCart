@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace ShoppingCart
 {
     [Serializable]
-    internal class ProductDoesNotExistException : Exception
+    public class ProductDoesNotExistException : Exception
     {
         public ProductDoesNotExistException()
         {

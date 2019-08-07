@@ -38,31 +38,25 @@ namespace ShoppingCart
                 _cart.CartStorage.Add(cartItem);
         }
 
-        public double GetDiscount(string ProductName)
+        public double GetDiscount(Category category)
         {
-           return Vendor.GetDiscountPercentage(ProductName);
+           return CategoricalDiscount.GetDiscountPercentage(category);
         }
 
-        public double[] GetAmountToBePaid()
+        public double GetAmountToBePaid()
         {
-            double[] finalAmountToBePaid =  new double[_cart.CartStorage.Count];
+            double finalAmountToBePaid = 0;
             _cart.CartStatus = CartStatus.Paid;
-            var index = 0;
+           // var index = 0;
             foreach(var item in _cart.CartStorage)
             {
-                var discount = GetDiscount(item.ProductName);
-                finalAmountToBePaid[index++] = item.TotalCost - ((item.TotalCost * discount) / 100);
+                var discount = GetDiscount(item.Product.Category);
+                finalAmountToBePaid += item.TotalCost - ((item.TotalCost * discount) / 100);
             }
             return finalAmountToBePaid;
         }
 
-        public double GetAmountToBePaidForProduct(string ProductName)
-        {
-            _cart.CartStatus = CartStatus.Paid;
-            var discount = GetDiscount(ProductName);
-            var Index = _cart.CartStorage.FindIndex(item => item.ProductName.Equals(ProductName));
-            return _cart.CartStorage[Index].TotalCost - (_cart.CartStorage[Index].TotalCost * discount / 100);
-        }
+        
 
         public void RemoveFromCart(CartItem cartItem)
         {
