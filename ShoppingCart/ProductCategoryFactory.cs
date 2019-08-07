@@ -6,9 +6,9 @@ namespace ShoppingCart
 {
     public class ProductCategoryFactory
     {
-        public static Category GetCategory(string ProductName)
+        public static Category GetCategory(string productName)
         {
-            switch (ProductName)
+            switch (productName)
             {
                 case "milk":
                 case "cheese": return Category.Dairy;

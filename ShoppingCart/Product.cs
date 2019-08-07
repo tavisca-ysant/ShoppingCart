@@ -2,9 +2,9 @@
 {
     public class Product
     {
-        public string Name { get; set; }
+        public string Name { get;  }
         private Category _category;
-        public double Price { get; set; }
+        public double Price { get;  }
         public Category Category
         {
             get => _category;

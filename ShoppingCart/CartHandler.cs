@@ -16,9 +16,9 @@ namespace ShoppingCart
 
         public bool CartContainsItem(CartItem cartItem)
         {
-            for(int i = 0; i < _cart.CartStorage.Count; i++)
+            for(int i = 0; i < _cart.CartProducts.Count; i++)
             {
-                if (_cart.CartStorage[i].ProductName.Equals(cartItem.ProductName))
+                if (_cart.CartProducts[i].ProductName.Equals(cartItem.ProductName))
                     return true;
             }
             return false;
@@ -30,12 +30,12 @@ namespace ShoppingCart
                 throw new InvalidCartStateException();
             if (CartContainsItem(cartItem))
             {
-                var index = _cart.CartStorage.FindIndex(Item => Item.Equals(cartItem));
-                _cart.CartStorage[index].Quantity = _cart.CartStorage[index].Quantity + cartItem.Quantity;
+                var index = _cart.CartProducts.FindIndex(Item => Item.Equals(cartItem));
+                _cart.CartProducts[index].Quantity = _cart.CartProducts[index].Quantity + cartItem.Quantity;
 
             }
             else
-                _cart.CartStorage.Add(cartItem);
+                _cart.CartProducts.Add(cartItem);
         }
 
         public double GetDiscount(Category category)
@@ -48,7 +48,7 @@ namespace ShoppingCart
             double finalAmountToBePaid = 0;
             _cart.CartStatus = CartStatus.Paid;
            // var index = 0;
-            foreach(var item in _cart.CartStorage)
+            foreach(var item in _cart.CartProducts)
             {
                 var discount = GetDiscount(item.Product.Category);
                 finalAmountToBePaid += item.TotalCost - ((item.TotalCost * discount) / 100);
@@ -64,14 +64,14 @@ namespace ShoppingCart
                 throw new InvalidCartStateException();
             if (!CartContainsItem(cartItem))
                 throw new ProductDoesNotExistException();
-            var index = _cart.CartStorage.FindIndex(Item => Item.Equals(cartItem));
-            var ItemQuantity = _cart.CartStorage[index].Quantity;
+            var index = _cart.CartProducts.FindIndex(Item => Item.Equals(cartItem));
+            var ItemQuantity = _cart.CartProducts[index].Quantity;
             if (ItemQuantity < cartItem.Quantity)
                 throw new InsufficientProductQuantityException();
             else if (ItemQuantity > cartItem.Quantity)
-                _cart.CartStorage[index].Quantity = ItemQuantity - cartItem.Quantity;
+                _cart.CartProducts[index].Quantity = ItemQuantity - cartItem.Quantity;
             else
-                _cart.CartStorage.RemoveAt(index);
+                _cart.CartProducts.RemoveAt(index);
         }
     }
 }

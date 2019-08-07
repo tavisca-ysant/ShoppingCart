@@ -40,8 +40,8 @@ namespace ShoppingCart.Tests
             _cartHandler.AddToCart(item1);
             CartItem itemToRemove = new CartItem(product1, 2);
             _cartHandler.RemoveFromCart(itemToRemove);
-            var Index = _cart.CartStorage.FindIndex(item => item.Equals(itemToRemove));
-            Assert.Equal(1, _cart.CartStorage[Index].Quantity);
+            var Index = _cart.CartProducts.FindIndex(item => item.Equals(itemToRemove));
+            Assert.Equal(1, _cart.CartProducts[Index].Quantity);
         }
 
 

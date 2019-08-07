@@ -23,8 +23,10 @@ namespace ShoppingCart
 
         public static double GetDiscountPercentage(Category category)
         {
-            _discountMap.TryGetValue(category, out double Discount);
-            return Discount;
+            var exists = _discountMap.TryGetValue(category, out double discount);
+            if(exists)
+                return discount;
+            throw new InvalidProductCategoryException();
         }
     }
 }

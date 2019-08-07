@@ -6,10 +6,10 @@ namespace ShoppingCart
 {
     public class CartItem
     {
-        public Product Product;
-        public int Quantity;
-        public double TotalCost;
-        
+        public Product Product { private set; get; }
+        public int Quantity { set; get; }
+        public double TotalCost { private set; get; }
+
         public CartItem(Product product, int quantity)
         {
             Product = product;

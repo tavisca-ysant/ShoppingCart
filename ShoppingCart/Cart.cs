@@ -6,7 +6,7 @@ namespace ShoppingCart
 {
     public class Cart
     {
-        private List<CartItem> _cartStorage = new List<CartItem>();
+        private List<CartItem> _cartProducts = new List<CartItem>();
         private CartStatus _cartStatus = CartStatus.Empty;
 
         public CartStatus CartStatus
@@ -14,9 +14,9 @@ namespace ShoppingCart
             get => _cartStatus;
             set => _cartStatus = value;
         }
-        public List<CartItem> CartStorage
+        public List<CartItem> CartProducts
         {
-            get => _cartStorage;
+            get => _cartProducts;
         }
     }
 }
