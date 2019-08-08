@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Compile Remove="CartBasedDiscount.cs" />
-    <Compile Remove="IDiscount.cs" />
   </ItemGroup>
 
 </Project>

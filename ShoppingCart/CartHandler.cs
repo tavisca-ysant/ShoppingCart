@@ -28,6 +28,8 @@ namespace ShoppingCart
         {
             if (_cart.CartStatus != CartStatus.Active)
                 throw new InvalidCartStateException();
+            if (cartItem.Quantity < 1)
+                throw new InvalidProductQuantityException();
             if (CartContainsItem(cartItem))
             {
                 var index = _cart.CartProducts.FindIndex(Item => Item.Equals(cartItem));
@@ -56,7 +58,15 @@ namespace ShoppingCart
             return finalAmountToBePaid;
         }
 
-        
+        public double GetAmountWithoutDiscount(List<CartItem> cartItem)
+        {
+            double BilledAmount = 0;
+            foreach(var item in cartItem)
+            {
+                BilledAmount += item.TotalCost;
+            }
+            return BilledAmount;
+        }
 
         public void RemoveFromCart(CartItem cartItem)
         {

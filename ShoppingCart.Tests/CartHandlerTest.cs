@@ -44,6 +44,12 @@ namespace ShoppingCart.Tests
             Assert.Equal(1, _cart.CartProducts[Index].Quantity);
         }
 
+        [Fact]
+        public void Add_invalid_quantity_to_cart()
+        {
+            CartItem cartItem = new CartItem(product1, 0);
+            Assert.Throws<InvalidProductQuantityException>(() => _cartHandler.AddToCart(cartItem));
+        }
 
         [Fact]
         public void Remove_item_from_cart_with_less_available_quantity()

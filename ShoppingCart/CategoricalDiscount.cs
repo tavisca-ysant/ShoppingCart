@@ -1,20 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace ShoppingCart
 {
-    public class CategoricalDiscount
+    public sealed class CategoricalDiscount : IDiscount
     {
-        private static Dictionary<Category, double> _discountMap = new Dictionary<Category, double>()
+        private static CategoricalDiscount _categoricalDiscount = null;
+        public CategoricalDiscount()
         {
-            {Category.Dairy, 10 },
-            {Category.Educational, 5 },
-            {Category.Gadgets, 8 }
-        };
 
-        public void UpdateDiscount(Category category, double discount)
+        }
+        private static Dictionary<Category, double> _discountMap = new Dictionary<Category, double>();
+
+        public static CategoricalDiscount GetInstance()
         {
+            //Singleton design pattern used for categorical discount as it wont
+            //change frequently
+            if (_categoricalDiscount == null)
+                _categoricalDiscount = new CategoricalDiscount();
+
+            return _categoricalDiscount;
+        }
+
+        public void SetDiscount(Category category, double discount)
+        {
+            if (discount < 0 || discount >= 100)
+                throw new InvalidDiscountException();
             if (!_discountMap.ContainsKey(category))
                 _discountMap.Add(category, discount);
             else
@@ -28,5 +41,20 @@ namespace ShoppingCart
                 return discount;
             throw new InvalidProductCategoryException();
         }
+
+        public double GetDiscountedTotal(List<CartItem> cartItemList)
+        {
+            double finalAmountToBePaid = 0;
+            
+            // var index = 0;
+            foreach (var item in cartItemList)
+            {
+                var discount = GetDiscountPercentage(item.Product.Category);
+                finalAmountToBePaid += item.TotalCost - ((item.TotalCost * discount) / 100);
+            }
+            return finalAmountToBePaid;
+        }
+
+        
     }
 }
