@@ -5,7 +5,21 @@ namespace ShoppingCart
     public class ConfigurableDiscount : IDiscount
     {
         private static Dictionary<string, double> _discountMap = new Dictionary<string, double>();
+        private static ConfigurableDiscount _configurableDiscount = null;
         private double _discountPercentage = 5;
+
+        private ConfigurableDiscount()
+        {
+
+        }
+
+        public static ConfigurableDiscount GetInstance()
+        {
+            if (_configurableDiscount == null)
+                _configurableDiscount = new ConfigurableDiscount();
+            return _configurableDiscount;
+        }
+
         public double GetDiscountedTotal(List<CartItem> cartItemList)
         {
             double BilledAmount = 0;

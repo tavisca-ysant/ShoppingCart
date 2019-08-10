@@ -11,9 +11,8 @@ namespace ShoppingCart
             switch (discountType)
             {
                 case "fixed": return new FixedDiscount();
-                case "configurable": return new ConfigurableDiscount();
-                case "category": return new CategoricalDiscount();
-                
+                case "configurable": ConfigurableDiscount.GetInstance();break;
+                case "category": CategoricalDiscount.GetInstance();break;
             }
             throw new InvalidDiscountTypeException();
         }

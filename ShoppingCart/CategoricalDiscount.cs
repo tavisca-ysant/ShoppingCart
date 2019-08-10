@@ -8,7 +8,7 @@ namespace ShoppingCart
     public sealed class CategoricalDiscount : IDiscount
     {
         private static CategoricalDiscount _categoricalDiscount = null;
-        public CategoricalDiscount()
+        private CategoricalDiscount()
         {
 
         }
